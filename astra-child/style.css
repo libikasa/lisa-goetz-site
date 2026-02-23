@@ -1,5 +1,468 @@
 /*
 Theme Name: Astra Child
 Template: astra
-Version: 1.0.0
+Version: 1.1.0
 */
+
+/* -------------------------------------------------
+   01) Design tokens
+------------------------------------------------- */
+:root {
+	--color-bg: #ffffff;
+	--color-surface: #f8fafc;
+	--color-surface-alt: #f3f6fb;
+	--color-text: #1d2735;
+	--color-text-muted: #526178;
+	--color-heading: #111827;
+	--color-primary: #1e5eff;
+	--color-primary-dark: #1747c7;
+	--color-primary-soft: rgba(30, 94, 255, 0.12);
+	--color-border: #dbe3ef;
+	--color-focus: #2563eb;
+	--color-success: #0f766e;
+
+	--space-1: 0.5rem; /* 8 */
+	--space-2: 1rem;   /* 16 */
+	--space-3: 1.5rem; /* 24 */
+	--space-4: 2rem;   /* 32 */
+	--space-5: 3rem;   /* 48 */
+	--space-6: 4rem;   /* 64 */
+
+	--radius-sm: 0.5rem;
+	--radius-md: 0.875rem;
+	--radius-lg: 1.25rem;
+
+	--shadow-sm: 0 3px 12px rgba(17, 24, 39, 0.06);
+	--shadow-md: 0 14px 30px rgba(17, 24, 39, 0.08);
+
+	--fs-body: clamp(1rem, 0.96rem + 0.15vw, 1.05rem);
+	--fs-small: 0.9rem;
+	--fs-h1: clamp(2rem, 1.4rem + 2.2vw, 3.3rem);
+	--fs-h2: clamp(1.6rem, 1.3rem + 1.3vw, 2.45rem);
+	--fs-h3: clamp(1.2rem, 1.1rem + 0.7vw, 1.65rem);
+	--lh-tight: 1.2;
+	--lh-base: 1.65;
+
+	--container-wide: 1200px;
+	--container-content: 760px;
+
+	--transition-base: 0.2s ease;
+}
+
+/* -------------------------------------------------
+   02) Base typography and spacing
+------------------------------------------------- */
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	background: var(--color-bg);
+	color: var(--color-text);
+	font-size: var(--fs-body);
+	line-height: var(--lh-base);
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+}
+
+p,
+ul,
+ol {
+	margin-bottom: var(--space-2);
+}
+
+small,
+.ast-small-footer,
+.site-footer small {
+	font-size: var(--fs-small);
+	color: var(--color-text-muted);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: var(--color-heading);
+	font-weight: 700;
+	line-height: var(--lh-tight);
+	letter-spacing: -0.015em;
+	margin: 0 0 var(--space-2);
+}
+
+h1,
+.entry-content h1 {
+	font-size: var(--fs-h1);
+}
+
+h2,
+.entry-content h2 {
+	font-size: var(--fs-h2);
+	margin-top: var(--space-4);
+}
+
+h3,
+.entry-content h3 {
+	font-size: var(--fs-h3);
+	margin-top: var(--space-3);
+}
+
+.wp-block-group,
+.wp-block-columns,
+.widget,
+.site-content article {
+	margin-bottom: var(--space-4);
+}
+
+/* -------------------------------------------------
+   03) Layout and section rhythm
+------------------------------------------------- */
+.ast-container,
+.site-primary-header-wrap .ast-builder-grid-row,
+.site-below-footer-wrap .ast-builder-grid-row {
+	max-width: var(--container-wide);
+	padding-left: var(--space-2);
+	padding-right: var(--space-2);
+}
+
+.entry-content > * {
+	max-width: var(--container-content);
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.entry-content > .alignwide,
+.entry-content > .alignfull,
+.entry-content > .wp-block-group.has-background,
+.entry-content > .wp-block-cover {
+	max-width: var(--container-wide);
+}
+
+.entry-content > .wp-block-group.has-background {
+	padding: var(--space-5) var(--space-2);
+	border-radius: var(--radius-lg);
+}
+
+.entry-content > .wp-block-group.has-background:nth-of-type(odd) {
+	background: var(--color-surface);
+}
+
+.entry-content > .wp-block-group.has-background:nth-of-type(even) {
+	background: var(--color-surface-alt);
+}
+
+/* -------------------------------------------------
+   04) Links and buttons
+------------------------------------------------- */
+a {
+	color: var(--color-primary);
+	text-decoration-thickness: 2px;
+	text-underline-offset: 3px;
+	transition: color var(--transition-base), background-color var(--transition-base);
+}
+
+a:hover,
+a:active {
+	color: var(--color-primary-dark);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+.wp-element-button:focus-visible {
+	outline: 3px solid var(--color-focus);
+	outline-offset: 2px;
+}
+
+.wp-block-button__link,
+.ast-button,
+.button,
+button,
+input[type="button"],
+input[type="submit"] {
+	border-radius: 999px;
+	padding: 0.72rem 1.25rem;
+	font-weight: 600;
+	font-size: 0.98rem;
+	line-height: 1.2;
+	border: 1px solid transparent;
+	transition: transform var(--transition-base), box-shadow var(--transition-base), background-color var(--transition-base), border-color var(--transition-base), color var(--transition-base);
+}
+
+.wp-block-button__link,
+.ast-button,
+.button,
+button,
+input[type="submit"] {
+	background-color: var(--color-primary);
+	color: #fff;
+}
+
+.wp-block-button__link:hover,
+.ast-button:hover,
+.button:hover,
+button:hover,
+input[type="submit"]:hover {
+	background-color: var(--color-primary-dark);
+	color: #fff;
+	transform: translateY(-1px);
+	box-shadow: var(--shadow-sm);
+}
+
+.is-style-outline .wp-block-button__link,
+.button.secondary,
+.ast-outline-button {
+	background: transparent;
+	color: var(--color-primary);
+	border-color: var(--color-primary);
+}
+
+.is-style-outline .wp-block-button__link:hover,
+.button.secondary:hover,
+.ast-outline-button:hover {
+	background: var(--color-primary-soft);
+	color: var(--color-primary-dark);
+}
+
+/* -------------------------------------------------
+   05) Card surfaces
+------------------------------------------------- */
+.wp-block-group.is-style-card,
+.service-card,
+.benefit-card,
+.resume-card,
+.ast-archive-entry,
+.ast-single-post .entry-content blockquote {
+	background: #fff;
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-sm);
+	padding: var(--space-3);
+}
+
+/* -------------------------------------------------
+   06) Header & navigation
+------------------------------------------------- */
+.site-header {
+	position: sticky;
+	top: 0;
+	z-index: 99;
+	backdrop-filter: blur(8px);
+	background: rgba(255, 255, 255, 0.92);
+	border-bottom: 1px solid rgba(219, 227, 239, 0.7);
+}
+
+.main-header-menu .menu-link,
+.ast-header-navigation .menu-link {
+	padding: 0.85rem 0.95rem;
+	border-radius: var(--radius-sm);
+	font-weight: 500;
+}
+
+.main-header-menu .menu-link:hover,
+.main-header-menu .current-menu-item > .menu-link,
+.main-header-menu .current-menu-ancestor > .menu-link {
+	background: var(--color-primary-soft);
+	color: var(--color-primary-dark);
+}
+
+/* -------------------------------------------------
+   07) Footer
+------------------------------------------------- */
+.site-footer {
+	background: #0f1726;
+	color: #d4deed;
+}
+
+.site-footer a {
+	color: #d4deed;
+}
+
+.site-footer a:hover {
+	color: #fff;
+}
+
+.site-above-footer-wrap,
+.site-primary-footer-wrap,
+.site-below-footer-wrap {
+	padding-top: var(--space-3);
+	padding-bottom: var(--space-3);
+}
+
+/* -------------------------------------------------
+   08) Forms
+------------------------------------------------- */
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="tel"],
+input[type="number"],
+input[type="search"],
+input[type="password"],
+textarea,
+select {
+	width: 100%;
+	min-height: 44px;
+	padding: 0.72rem 0.85rem;
+	border-radius: 0.75rem;
+	border: 1px solid var(--color-border);
+	background: #fff;
+	transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+	border-color: var(--color-focus);
+	box-shadow: 0 0 0 3px var(--color-primary-soft);
+}
+
+label {
+	font-weight: 600;
+	margin-bottom: 0.35rem;
+	display: inline-block;
+}
+
+/* -------------------------------------------------
+   09) Resume/CV helpers
+------------------------------------------------- */
+.resume-header {
+	display: grid;
+	gap: var(--space-2);
+	padding: var(--space-4);
+	background: linear-gradient(140deg, #eff4ff 0%, #ffffff 100%);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-lg);
+}
+
+.resume-summary {
+	color: var(--color-text-muted);
+	max-width: 65ch;
+}
+
+.resume-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin-top: var(--space-2);
+}
+
+.resume-tag {
+	padding: 0.35rem 0.75rem;
+	font-size: 0.85rem;
+	font-weight: 600;
+	border-radius: 999px;
+	background: var(--color-primary-soft);
+	color: var(--color-primary-dark);
+}
+
+.resume-timeline {
+	border-left: 2px solid var(--color-border);
+	padding-left: var(--space-3);
+	margin-left: 0.4rem;
+}
+
+.resume-item {
+	position: relative;
+	padding-bottom: var(--space-3);
+}
+
+.resume-item::before {
+	content: "";
+	position: absolute;
+	left: calc(-1 * var(--space-3) - 0.45rem);
+	top: 0.35rem;
+	width: 0.65rem;
+	height: 0.65rem;
+	border-radius: 50%;
+	background: var(--color-primary);
+}
+
+.resume-meta {
+	display: flex;
+	gap: 0.6rem;
+	flex-wrap: wrap;
+	font-size: 0.95rem;
+	color: var(--color-text-muted);
+}
+
+/* -------------------------------------------------
+   10) Mobile-first improvements
+------------------------------------------------- */
+@media (max-width: 920px) {
+	.ast-container {
+		padding-left: var(--space-2);
+		padding-right: var(--space-2);
+	}
+
+	.entry-content > .wp-block-group.has-background {
+		padding: var(--space-4) var(--space-2);
+	}
+
+	.main-header-menu .menu-link,
+	.ast-mobile-header-wrap .ast-builder-menu-mobile .menu-link {
+		padding-top: 0.85rem;
+		padding-bottom: 0.85rem;
+	}
+}
+
+@media (max-width: 544px) {
+	:root {
+		--space-5: 2.5rem;
+		--space-6: 3rem;
+	}
+
+	body {
+		font-size: 0.98rem;
+	}
+
+	.wp-block-button__link,
+	.ast-button,
+	.button,
+	button,
+	input[type="submit"] {
+		width: 100%;
+		text-align: center;
+		min-height: 44px;
+	}
+}
+
+/* -------------------------------------------------
+   11) Print-friendly CV
+------------------------------------------------- */
+@media print {
+	body {
+		background: #fff !important;
+		font-size: 11pt;
+		line-height: 1.45;
+	}
+
+	.site-header,
+	.site-footer,
+	.ast-breadcrumbs,
+	.wp-block-button,
+	.ast-scroll-top-icon {
+		display: none !important;
+	}
+
+	.entry-content > * {
+		max-width: 100% !important;
+	}
+
+	.resume-header,
+	.resume-card,
+	.resume-item,
+	.wp-block-group.has-background {
+		border: 1px solid #c8cfda !important;
+		box-shadow: none !important;
+		break-inside: avoid;
+	}
+
+	a {
+		color: #000 !important;
+		text-decoration: none;
+	}
+}
