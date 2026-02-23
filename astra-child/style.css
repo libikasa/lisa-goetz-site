@@ -3,3 +3,387 @@ Theme Name: Astra Child
 Template: astra
 Version: 1.0.0
 */
+
+/* =========================================================
+   Astra Child Design System
+   Fokus: clean, mobil-first, konsistente Abstände & Typografie
+   ========================================================= */
+
+:root {
+  --color-primary: #2f5cff;
+  --color-primary-dark: #1f44d6;
+  --color-secondary: #0ea5a1;
+  --color-bg: #ffffff;
+  --color-surface: #f8fafe;
+  --color-border: #dbe3f0;
+  --color-text: #1b2430;
+  --color-text-muted: #5a6676;
+  --color-success: #0b7a39;
+  --color-error: #b42318;
+
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  --text-xs: 0.875rem;
+  --text-sm: 1rem;
+  --text-md: 1.125rem;
+  --text-lg: clamp(1.5rem, 1.2rem + 1.2vw, 2.1rem);
+  --text-xl: clamp(2rem, 1.6rem + 2.2vw, 3rem);
+
+  --lh-tight: 1.2;
+  --lh-body: 1.65;
+
+  --space-1: 0.5rem;  /* 8px */
+  --space-2: 1rem;    /* 16px */
+  --space-3: 1.5rem;  /* 24px */
+  --space-4: 2rem;    /* 32px */
+  --space-5: 3rem;    /* 48px */
+  --space-6: 4rem;    /* 64px */
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+
+  --shadow-sm: 0 2px 8px rgba(19, 39, 72, 0.08);
+  --shadow-md: 0 10px 25px rgba(19, 39, 72, 0.1);
+
+  --content-max: 74rem;
+  --transition-fast: 180ms ease;
+}
+
+/* Base -------------------------------------------------------------------- */
+html {
+  font-size: 100%;
+  scroll-behavior: smooth;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  font-family: var(--font-body);
+}
+
+body {
+  color: var(--color-text);
+  background: var(--color-bg);
+  font-size: var(--text-sm);
+  line-height: var(--lh-body);
+  letter-spacing: 0.01em;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+:where(.site-content, .ast-container, .entry-content) {
+  max-width: var(--content-max);
+}
+
+:where(.site-content, .entry-content) > * + * {
+  margin-block-start: var(--space-3);
+}
+
+p,
+ul,
+ol {
+  margin: 0;
+  color: var(--color-text);
+}
+
+small,
+.small-text {
+  font-size: var(--text-xs);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+/* Typographic scale -------------------------------------------------------- */
+h1,
+.entry-content h1 {
+  font-size: var(--text-xl);
+  line-height: var(--lh-tight);
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--space-3);
+}
+
+h2,
+.entry-content h2 {
+  font-size: var(--text-lg);
+  line-height: calc(var(--lh-tight) + 0.05);
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--space-2);
+}
+
+h3,
+.entry-content h3 {
+  font-size: var(--text-md);
+  line-height: 1.35;
+  margin: 0 0 var(--space-2);
+}
+
+/* Links & focus accessibility --------------------------------------------- */
+a {
+  color: var(--color-primary);
+  text-decoration-color: rgba(47, 92, 255, 0.45);
+  text-underline-offset: 0.15em;
+  transition: color var(--transition-fast), text-decoration-color var(--transition-fast);
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--color-primary-dark);
+  text-decoration-color: currentColor;
+}
+
+:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-primary) 65%, white);
+  outline-offset: 2px;
+}
+
+/* Layout spacing consistency ------------------------------------------------ */
+.site-content {
+  padding-block: var(--space-4);
+}
+
+.ast-separate-container .ast-article-post,
+.ast-separate-container .ast-article-single {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  padding: var(--space-4);
+}
+
+.wp-block-group,
+.wp-block-columns,
+.wp-block-cover {
+  margin-block: var(--space-4);
+}
+
+.wp-block-group__inner-container > * + * {
+  margin-block-start: var(--space-3);
+}
+
+/* Buttons ----------------------------------------------------------------- */
+button,
+input[type='button'],
+input[type='submit'],
+.wp-block-button__link,
+.ast-button,
+.button {
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  font-weight: 600;
+  font-size: var(--text-sm);
+  line-height: 1.2;
+  padding: 0.8rem 1.2rem;
+  min-height: 2.75rem;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+}
+
+button,
+input[type='button'],
+input[type='submit'],
+.ast-button,
+.button,
+.wp-block-button__link:not(.is-style-outline) {
+  background: var(--color-primary);
+  color: #ffffff;
+}
+
+button:hover,
+input[type='button']:hover,
+input[type='submit']:hover,
+.ast-button:hover,
+.button:hover,
+.wp-block-button__link:not(.is-style-outline):hover {
+  background: var(--color-primary-dark);
+  color: #ffffff;
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
+}
+
+.wp-block-button__link.is-style-outline,
+.button.is-secondary,
+.ast-button.is-secondary {
+  background: transparent;
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.wp-block-button__link.is-style-outline:hover,
+.button.is-secondary:hover,
+.ast-button.is-secondary:hover {
+  background: color-mix(in srgb, var(--color-primary) 10%, #ffffff);
+  color: var(--color-primary-dark);
+}
+
+/* Cards & containers ------------------------------------------------------- */
+.card,
+.wp-block-group.is-style-card,
+.ast-separate-container .site-main article,
+.widget {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.widget,
+.card,
+.wp-block-group.is-style-card {
+  padding: var(--space-3);
+}
+
+/* Header / nav ------------------------------------------------------------- */
+.site-header {
+  border-bottom: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(6px);
+}
+
+.main-header-menu .menu-link,
+.ast-header-navigation .menu-link {
+  border-radius: var(--radius-sm);
+  padding: 0.55rem 0.8rem;
+  color: var(--color-text);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.main-header-menu .menu-link:hover,
+.ast-header-navigation .menu-link:hover,
+.main-header-menu .current-menu-item > .menu-link,
+.ast-header-navigation .current-menu-item > .menu-link,
+.main-header-menu .current_page_item > .menu-link {
+  background: color-mix(in srgb, var(--color-primary) 12%, #ffffff);
+  color: var(--color-primary-dark);
+}
+
+/* Forms ------------------------------------------------------------------- */
+label {
+  display: inline-block;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+input[type='text'],
+input[type='email'],
+input[type='url'],
+input[type='password'],
+input[type='search'],
+input[type='number'],
+input[type='tel'],
+textarea,
+select {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 0.9rem;
+  background: #ffffff;
+  color: var(--color-text);
+  min-height: 2.75rem;
+}
+
+textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.95;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 18%, #ffffff);
+  outline: none;
+}
+
+input:invalid,
+textarea:invalid,
+select:invalid,
+.woocommerce-invalid input,
+.woocommerce-invalid select {
+  border-color: var(--color-error);
+}
+
+/* Utility: consistent section padding for common WP blocks ----------------- */
+.section,
+.wp-block-cover,
+.wp-block-group.alignfull {
+  padding-block: var(--space-5);
+}
+
+/* Mobile-first adjustments -------------------------------------------------- */
+@media (max-width: 921px) {
+  .site-content {
+    padding-block: var(--space-3);
+  }
+
+  .ast-separate-container .ast-article-post,
+  .ast-separate-container .ast-article-single,
+  .widget,
+  .card {
+    padding: var(--space-3);
+  }
+
+  .main-header-menu .menu-link,
+  .ast-header-navigation .menu-link {
+    padding: 0.7rem 0.95rem;
+  }
+
+  button,
+  input[type='button'],
+  input[type='submit'],
+  .wp-block-button__link,
+  .ast-button,
+  .button {
+    width: auto;
+    min-height: 3rem;
+  }
+}
+
+@media (max-width: 544px) {
+  body {
+    font-size: 0.98rem;
+  }
+
+  .site-content {
+    padding-inline: var(--space-2);
+  }
+
+  h1,
+  .entry-content h1 {
+    margin-bottom: var(--space-2);
+  }
+
+  h2,
+  .entry-content h2,
+  h3,
+  .entry-content h3 {
+    margin-bottom: var(--space-1);
+  }
+
+  .section,
+  .wp-block-cover,
+  .wp-block-group.alignfull {
+    padding-block: var(--space-4);
+  }
+
+  .ast-mobile-popup-content {
+    padding: var(--space-2);
+  }
+
+  .ast-builder-menu-mobile .menu-item > .menu-link {
+    padding-block: 0.75rem;
+  }
+}
