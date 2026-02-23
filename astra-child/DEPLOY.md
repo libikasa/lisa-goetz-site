@@ -1,54 +1,56 @@
-# Deployment-Anleitung (Astra Child Theme)
+# DEPLOY — PR Änderungen auf den Server übernehmen
 
-## 1) Änderungen aus GitHub holen
+## Voraussetzungen
+- Zugriff auf dein Git-Repository (lokal oder Server)
+- Schreibzugriff auf die WordPress-Installation
+- Backup-Möglichkeit (Dateien + Datenbank)
 
-Auf deinem Server im Projektverzeichnis:
+## 1) Vor dem Deployment
+1. **Backup erstellen** (Pflicht)
+   - `wp-content/themes/astra-child`
+   - Datenbank-Backup
+2. In Staging testen (wenn vorhanden).
 
-```bash
-git fetch origin
-git checkout <dein-branch-oder-main>
-git pull
-```
+## 2) Änderungen aus dem PR übernehmen
 
-## 2) Child Theme deployen
+### Option A: Git-basiertes Deployment (empfohlen)
+1. Auf dem Server ins Theme-Repo wechseln.
+2. PR-Branch oder Main aktualisieren:
+   ```bash
+   git fetch --all
+   git checkout <target-branch>
+   git pull
+   ```
+3. Sicherstellen, dass nur Dateien im Ordner `astra-child/` geändert wurden.
 
-Den Inhalt aus `astra-child/` nach WordPress kopieren:
+### Option B: Manuelles Deployment
+1. Aus dem gemergten Stand nur folgende Dateien hochladen:
+   - `astra-child/style.css`
+   - `astra-child/STYLEGUIDE.md`
+   - `astra-child/CONTENT-STRUCTURE.md`
+   - `astra-child/RESUME-GUIDE.md`
+   - `astra-child/DEPLOY.md`
+2. Vorhandene Dateien im Zielordner ersetzen.
 
-```bash
-rsync -av --delete astra-child/ /pfad/zu/wordpress/wp-content/themes/astra-child/
-```
+## 3) Nach dem Deployment
+1. WordPress-/Plugin-Cache leeren.
+2. CDN-Cache leeren (falls aktiv).
+3. Browser Hard-Reload (`Cmd/Ctrl + Shift + R`).
+4. Sichtprüfung Desktop + Mobile durchführen.
 
-Alternative ohne rsync:
+## 4) Quick QA Checkliste
+- Header sticky, Navigation mit Hover/Active State sichtbar
+- Typografie skaliert sauber (H1/H2/H3)
+- Buttons (Primary/Secondary) inkl. Focus-Ring
+- Formulareingaben mit modernem Focus-Verhalten
+- Resume-Seite mit Timeline/Tags konsistent
+- Print Preview der Resume-Seite kontrollieren
 
-```bash
-cp -r astra-child/* /pfad/zu/wordpress/wp-content/themes/astra-child/
-```
-
-## 3) Cache leeren
-
-- WordPress/Plugin Cache leeren (falls aktiv)
-- CDN Cache leeren (falls aktiv)
-- Browser Hard Refresh (Cmd/Ctrl + Shift + R)
-
-## 4) Test-Checkliste
-
-### Desktop
-- Header/Navigations-Hover und Active-Zustände sichtbar
-- Typografie-Hierarchie (H1/H2/H3) konsistent
-- Buttons (Primary/Secondary) korrekt mit Hover + Fokus
-- Formulareingaben: Fokus, Placeholder, Fehlerrahmen sichtbar
-- Cards/Container mit konsistentem Radius/Schatten
-
-### Mobile (ca. 390px Breite)
-- Lesbare Schriftgrößen und saubere Zeilenumbrüche
-- Ausreichende Touch-Flächen für Buttons/Menu
-- Gleichmäßige Abstände zwischen Sektionen
-- Mobiles Menü mit stimmigen Paddings
-
-## 5) Rollback (falls nötig)
-
+## 5) Rollback
+Falls etwas nicht passt:
 ```bash
 git log --oneline -n 5
-git checkout <letzter-stabiler-commit> -- astra-child
-rsync -av --delete astra-child/ /pfad/zu/wordpress/wp-content/themes/astra-child/
+git revert <commit_hash>
+git push
 ```
+Oder Backup des `astra-child` Ordners zurückspielen.

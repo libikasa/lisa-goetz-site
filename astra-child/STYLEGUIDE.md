@@ -1,70 +1,84 @@
-# Astra Child Theme Styleguide
+# STYLEGUIDE — Astra Child Theme Refresh
 
-## 1) Farben
+## 1) Design-Prinzipien
+- **Clean & modern:** Reduzierte Farbpalette, klare Typografie, viel Weißraum.
+- **Lesbarkeit zuerst:** Begrenzte Textbreite (`max-width: 760px`) und großzügige Zeilenhöhe.
+- **Konsistenz:** Einheitliche Spacing-Schritte, Radien, Schatten und Interaktionen.
+- **Performance-freundlich:** Nur leichtgewichtiges CSS, keine externen Frameworks.
 
-- **Primary:** `#2f5cff` (interaktive Hauptfarbe: Links, Primary Buttons)
-- **Primary Dark:** `#1f44d6` (Hover/Active)
-- **Secondary:** `#0ea5a1` (akzentuierende Elemente)
-- **Text:** `#1b2430`
-- **Text Muted:** `#5a6676`
-- **Surface:** `#f8fafe`
-- **Border:** `#dbe3f0`
-- **Error:** `#b42318`
+## 2) Farbpalette (Tokens)
+- `--color-bg: #ffffff`
+- `--color-surface: #f8fafc`
+- `--color-surface-alt: #f3f6fb`
+- `--color-text: #1d2735`
+- `--color-text-muted: #526178`
+- `--color-heading: #111827`
+- `--color-primary: #1e5eff`
+- `--color-primary-dark: #1747c7`
+- `--color-border: #dbe3ef`
+- `--color-focus: #2563eb`
 
-## 2) Typografie
+## 3) Typografie-Skala
+- **Body:** `--fs-body` (`clamp(1rem, 0.96rem + 0.15vw, 1.05rem)`)
+- **Small:** `--fs-small` (`0.9rem`)
+- **H1:** `--fs-h1` (`clamp(2rem, 1.4rem + 2.2vw, 3.3rem)`)
+- **H2:** `--fs-h2` (`clamp(1.6rem, 1.3rem + 1.3vw, 2.45rem)`)
+- **H3:** `--fs-h3` (`clamp(1.2rem, 1.1rem + 0.7vw, 1.65rem)`)
 
-- **Body:** `1rem`, Line Height `1.65`
-- **Small:** `0.875rem`
-- **H1:** `clamp(2rem, 1.6rem + 2.2vw, 3rem)`
-- **H2:** `clamp(1.5rem, 1.2rem + 1.2vw, 2.1rem)`
-- **H3:** `1.125rem`
+## 4) Spacing-System
+- `--space-1: 8px`
+- `--space-2: 16px`
+- `--space-3: 24px`
+- `--space-4: 32px`
+- `--space-5: 48px`
+- `--space-6: 64px`
 
-Regel: klare Hierarchie, kurze Zeilenbreiten und genügend Zeilenhöhe für Lesbarkeit.
+**Empfehlung für Gutenberg-Blöcke:**
+- Zwischen inhaltlichen Hauptsektionen: **48–64px**
+- Zwischen Headlines und Fließtext: **16px**
+- Zwischen Card-Inhalten: **24px**
 
-## 3) Spacing-System
-
-8pt-ähnliche Skala:
-
-- `--space-1`: 8px
-- `--space-2`: 16px
-- `--space-3`: 24px
-- `--space-4`: 32px
-- `--space-5`: 48px
-- `--space-6`: 64px
-
-Regel: Vertikale Abstände standardisiert über diese Tokens vergeben, statt Einzelwerte pro Komponente.
-
-## 4) Buttons
-
+## 5) Buttons
 ### Primary
-- Hintergrund: Primary
-- Text: Weiß
-- Radius: 12px
-- Hover: Primary Dark + leichter Lift (`translateY(-1px)`)
+- Blau gefüllt (`--color-primary`)
+- Weißer Text
+- Radius: Pill (`999px`)
+- Hover: dunkler + leichter Lift + Schatten
 
 ### Secondary / Outline
-- Hintergrund: transparent
-- Border + Text: Primary
-- Hover: sehr leichte Primary-Tönung
+- Transparenter Hintergrund
+- Blauer Border + Text
+- Hover: softes Blau als Fläche
 
 ### Accessibility
-- Sichtbarer `:focus-visible` Ring (3px)
-- Mindesthöhe für Touch: 44px+ (`min-height: 2.75rem`)
+- Fokuszustand mit deutlich sichtbarem Ring (`outline: 3px solid --color-focus`)
+- Mobile min. 44px Touch-Höhe
 
-## 5) Cards / Container
+## 6) Cards & Sections
+- Karten: Weiß, `1px` Border, dezenter Schatten, Radius `--radius-md`
+- Sektionen: Alternierende, sehr helle Hintergründe (`surface/surface-alt`)
+- Einheitliches Innenpadding in Sektionen
 
-- Hintergrund: Weiß
-- Border: `1px solid #dbe3f0`
-- Radius: 16px
-- Schatten: dezent (`0 2px 8px rgba(19,39,72,0.08)`)
-- Innenabstand: standardmäßig 24px (mobil ggf. geringer)
+## 7) Navigation & Footer
+- Sticky Header mit leichter Transparenz/Blur
+- Aktiver Menüpunkt mit softem Hintergrund
+- Footer dunkel, klarer Kontrast, gut lesbare Links
 
-Kurzbeispiel (HTML-Klasse):
+## 8) Formulare
+- Inputs mit 44px Mindesthöhe
+- Einheitliche Border, Radius und Padding
+- Focus mit Border-Highlight + softem Schattenring
 
-```html
-<div class="card">
-  <h3>Titel</h3>
-  <p>Inhalt im Card-Layout.</p>
-  <a class="button" href="#">Mehr erfahren</a>
-</div>
-```
+## 9) Container-Regeln
+- Gesamtcontainer: `--container-wide: 1200px`
+- Lesespalte für Text: `--container-content: 760px`
+
+## 10) Empfehlungen für konsistente WP-Block-Nutzung
+- CTA-Buttons immer als Gutenberg Button Block verwenden
+- Karten als Group Block mit zusätzlicher Klasse:
+  - `is-style-card`
+  - Optional auf Resume: `resume-card`
+- Resume-Timeline:
+  - Wrapper: `resume-timeline`
+  - Eintrag: `resume-item`
+  - Metainfo: `resume-meta`
